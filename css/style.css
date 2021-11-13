@@ -1,0 +1,37 @@
+:root {
+    --fundo-color: #7A9EFB;
+    --azul-color: #3EBFDB;
+    --ciano-color: #3EDBBF;
+    --amarelo-color: #FDF53A;
+    --laranja-color: #F7931E;
+}
+
+body {
+    background-color: var(--fundo-color) !important;
+}
+
+.row {
+    display: flex;
+}
+
+.container {
+    width: 466px;
+    height: 518px;
+    background-color: white;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    border-radius: 15px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-left: 3%;
+    margin-top: 10%;
+}
+.logoTxt {
+    margin-top: 30%;
+    float: left;
+    color: var(--fundo-color);
+    margin-left: 8%;
+}
