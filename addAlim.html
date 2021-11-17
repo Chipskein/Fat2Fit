@@ -44,7 +44,7 @@
                 var input = document.getElementById('inputSearch').value;
                 console.log(input);
                 var url = `https://caloriasporalimentoapi.herokuapp.com/api/calorias/?descricao=${input}`;
-                var response = await fetch(url,{"Content-type":"text/plain","Access-Control-Request-Method":"GET","Access-Control-Allow-Origin": "*"});
+                var response = await fetch(url,{"Content-type":"application/json","Access-Control-Request-Method":"GET","Access-Control-Allow-Origin": "https://caloriasporalimentoapi.herokuapp.com"});
                 console.log(response);
             }
         </script>
