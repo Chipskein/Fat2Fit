@@ -17,11 +17,11 @@
             <div class="header row">
                 <img src="imgs/diet.png" class="logo" alt="">
                 <p class="logoTxt">Fat to Fit</p>
-                <p class="metaTxt">Meta - 2100 kcal</p>
+                <p id="meta" class="metaTxt">Meta - 0 kcal</p>
             </div>
             <div class="secondLine row">
                 <p class="dataTxt">Qua 12/11/2021</p>
-                <p class="totalTxt">Total - 1900 kcal</p>
+                <p id="total" class="totalTxt">Total - 0 kcal</p>
             </div>
             
             <div class="refeicoes cafeManha">
@@ -29,8 +29,8 @@
                     <h5>Café da manhã</h5>
                 </div>
                 <div class="refeicoes-buttons">
-                    <div class="maisButton" onclick=""><img class="maisIcon" src="imgs/plus.png" alt=""></div>
-                    <div class="infoButton" onclick=""><img class="infoIcon" src="imgs/information.png" alt=""></div>
+                    <div class="maisButton" onclick="localStorage.setItem('refeicao', 'Café da Manhã');window.location.href='addAlim.html'"><img class="maisIcon" src="imgs/plus.png" alt=""></div>
+                    <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Café da Manhã');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
 
@@ -39,8 +39,8 @@
                     <h5>Almoço</h5>
                 </div>
                 <div class="refeicoes-buttons">
-                    <div class="maisButton" onclick=""><img class="maisIcon" src="imgs/plus.png" alt=""></div>
-                    <div class="infoButton" onclick=""><img class="infoIcon" src="imgs/information.png" alt=""></div>
+                    <div class="maisButton" onclick="localStorage.setItem('refeicao', 'Almoco');window.location.href='addAlim.html'"><img class="maisIcon" src="imgs/plus.png" alt=""></div>
+                    <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Almoco');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
 
@@ -49,8 +49,8 @@
                     <h5>Café da Tarde</h5>
                 </div>
                 <div class="refeicoes-buttons">
-                    <div class="maisButton" onclick=""><img class="maisIcon" src="imgs/plus.png" alt=""></div>
-                    <div class="infoButton" onclick=""><img class="infoIcon" src="imgs/information.png" alt=""></div>
+                    <div class="maisButton" onclick="localStorage.setItem('refeicao', 'Café da Tarde');window.location.href='addAlim.html'"><img class="maisIcon" src="imgs/plus.png" alt=""></div>
+                    <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Café da Tarde');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
 
@@ -59,22 +59,60 @@
                     <h5>Janta</h5>
                 </div>
                 <div class="refeicoes-buttons">
-                    <div class="maisButton" onclick=""><img class="maisIcon" src="imgs/plus.png" alt=""></div>
-                    <div class="infoButton" onclick=""><img class="infoIcon" src="imgs/information.png" alt=""></div>
+                    <div class="maisButton" onclick="localStorage.setItem('refeicao', 'Janta');window.location.href='addAlim.html'"><img class="maisIcon" src="imgs/plus.png" alt=""></div>
+                    <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Janta');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
-            <div class="meta-button row" onclick="editarMeta()">
+            <div id="meta-button" class="row" onclick="editarMeta()">
                 <p>Editar Meta</p>
                 <img src="imgs/pencil.png" alt="lapis">
+            </div>
+            <div id="meta-edit" class="row">
+                <input id="inputMeta" type="number" placeholder="Meta ...">
+                <div id="buttonX"  class="buttonX" onclick="canceleditMeta()">
+                    <img class="iconX" src="imgs/plus.png" alt="plus">
+                </div>
+                <div onclick="updateMeta()">
+                    <img class="iconCheck" src="imgs/check-mark.png" alt="check-mark">
+                </div>
             </div>
         </div>
 
         <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                if(localStorage.getItem('meta')){
+                    document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
+                } else {
+                    localStorage.setItem('meta', 2100);
+                    document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
+                }
+            });
+
             if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-            .then(function () {console.log('service worker registered');})
-            .catch(function () {console.log('service worker failed'); });
+                navigator.serviceWorker.register('./sw.js')
+                .then(function () {console.log('service worker registered');})
+                .catch(function () {console.log('service worker failed'); });
             }
+            function editarMeta() {
+                let metaButton = document.getElementById('meta-button');
+                metaButton.style.display = 'none';
+                let metaEdit = document.getElementById('meta-edit');
+                metaEdit.style.display = 'flex';
+                
+            }
+            function canceleditMeta(){
+                let metaButton = document.getElementById('meta-button');
+                metaButton.style.display = 'flex';
+                let metaEdit = document.getElementById('meta-edit');
+                metaEdit.style.display = "none";
+            }
+            function updateMeta(){
+                let input = document.getElementById('inputMeta').value;
+                localStorage.setItem('meta', input);
+                document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
+                canceleditMeta();
+            }
+
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>

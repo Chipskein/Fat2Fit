@@ -13,6 +13,9 @@ body {
 .row {
     display: flex;
 }
+.hidden {
+    display: none;
+}
 
 .container {
     width: 35%;
@@ -112,7 +115,7 @@ body {
     height: 20px;
 }
 
-.meta-button {
+#meta-button {
     position: relative;
     margin: auto;
     margin-top: 4%;
@@ -124,12 +127,75 @@ body {
     color: var(--ciano-color);
 }
 
-.meta-button p {
+#meta-button p {
     margin-right: 5px;
     margin-left: 23%;
 }
-.meta-button img {
+#meta-button img {
     width: 21px;
     height: 20px;
     align-self: center;
+}
+
+#meta-edit {
+    position: relative;
+    display: none;
+    margin: auto;
+    margin-top: 4%;
+    align-items: center;
+    width: 270px;
+    height: 47px;
+    border: 1px solid var(--ciano-color);
+    border-radius: 10px;
+    color: var(--ciano-color);
+}
+
+#meta-edit input {
+    font-size: 13px;
+    width: 190px;
+    margin-left: 5px;
+    border: none;
+    outline: none;
+}
+.buttonX {
+    width: 21px;
+    height: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.iconX{
+    width: 21px;
+    height: 20px;
+    transform: rotate(45deg)
+}
+.iconCheck{
+    width: 21px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.adicionarTxt {
+    margin-top: -12px;
+    text-align: center;
+    font-size: 17px;
+}
+
+#searchAlim {
+    position: relative;
+    margin: auto;
+    margin-top: 4%;
+    align-items: center;
+    margin-left: 17%;
+    margin-right: 17%;
+    height: 37px;
+    border: 1px solid var(--ciano-color);
+    border-radius: 10px;
+    color: var(--ciano-color);
+}
+#inputSearch {
+    font-size: 13px;
+    width: 270px;
+    margin-left: 5px;
+    border: none;
+    outline: none;
 }

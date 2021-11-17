@@ -5,6 +5,7 @@
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
         <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="imgs/diet.png" type="image/png">
         <link rel="manifest" href="manifest.json">
         <!--Let browser know website is optimized for mobile-->
@@ -12,13 +13,39 @@
         <title>Fat2fit</title>
     </head>
     <body>
-        <!--JavaScript at end of body for optimized loading-->
+        <div class="container">
+            <div class="header row">
+                <img src="imgs/diet.png" class="logo" alt="">
+                <p id="refeicaoTxt" class="logoTxt">Fat to Fit</p>
+                <p id="meta" class="metaTxt">Meta - 0 kcal</p>
+            </div>
+            <p class="adicionarTxt">Adicionar um alimento</p>
+            <div id="searchAlim" class="row">
+                <input id="inputSearch" type="text" placeholder="Frango ...">
+                <div id="buttonX"  class="buttonX" onclick="searchAlim()">
+                    <img class="iconCheck" src="imgs/lupa.png" alt="plus">
+                </div>
+            </div>
+        </div>
 
         <script>
             if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('./sw.js')
-            .then(function () {console.log('service worker registered');})
-            .catch(function () {console.log('service worker failed'); });
+                navigator.serviceWorker.register('./sw.js')
+                .then(function () {console.log('service worker registered');})
+                .catch(function () {console.log('service worker failed'); });
+            }
+
+            window.addEventListener('DOMContentLoaded', (event) => {
+                document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
+                document.getElementById('refeicaoTxt').innerHTML = localStorage.getItem('refeicao');
+            });
+
+            async function searchAlim() {
+                var input = document.getElementById('inputSearch').value;
+                console.log(input);
+                var url = `https://caloriasporalimentoapi.herokuapp.com/api/calorias/?descricao=${input}`;
+                var response = await fetch(url);
+                console.log(response);
             }
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
