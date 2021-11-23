@@ -30,31 +30,22 @@ h5 {
     margin-bottom: 5%;
     border-radius: 20px;
 }
-
 .logo {
     width: 60px;
     height: 60px;
-    margin-left: 3%;
-    margin-top: 3%;
 }
 .logoTxt {
     color: var(--fundo-color);
     font-size: 1.4rem;
-    margin-top: 6%;
-    margin-left: 2%;
     font-weight: bold;
 }
 .metaTxt {
     color: var(--laranja-color);
     font-size: 1.4rem;
-    position: relative;
-    margin-top: 8%;
-    margin-left: 50%;
 }
 
 .secondLine {
     justify-content: space-between;
-    width: 70vw;
 }
 
 .dataTxt {
