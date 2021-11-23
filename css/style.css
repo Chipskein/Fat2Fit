@@ -19,7 +19,6 @@ body {
 
 .container {
     width: 35%;
-    height: 518px;
     background-color: white;
     margin-top: 5%;
     margin-bottom: 5%;
@@ -126,6 +125,9 @@ body {
     border-radius: 15px;
     color: var(--ciano-color);
 }
+#paddingbutton {
+    padding-bottom: 5%;
+}
 
 #meta-button p {
     margin-right: 5px;
@@ -175,8 +177,9 @@ body {
 }
 
 .adicionarTxt {
-    margin-top: -12px;
-    text-align: center;
+    margin-top: -8px;
+    position: relative;
+    left:200px;
     font-size: 17px;
 }
 
@@ -194,8 +197,17 @@ body {
 }
 #inputSearch {
     font-size: 13px;
-    width: 270px;
     margin-left: 5px;
     border: none;
     outline: none;
+}
+.back{
+    height: 30px;
+    width: 30px;
+    margin-left: 20px;
+}
+.rowMsm{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
 }
