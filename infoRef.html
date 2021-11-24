@@ -99,10 +99,52 @@
                     div.innerHTML = txt;
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.almoco.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.almoco[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.almoco[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                        c1++
+                    }
+                    div.innerHTML = txt;
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.cafeTarde.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.cafeTarde[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.cafeTarde[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                        c1++
+                    }
+                    div.innerHTML = txt;
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.janta.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.janta[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.janta[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                        c1++
+                    }
+                    div.innerHTML = txt;
                 }
             }
             function nextPage(){
