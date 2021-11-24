@@ -51,6 +51,7 @@
                         txt.style.color="var(--laranja-color)";
                     }
                     getAliments();
+                    getTotalKcal();
                 }
             });
             if ('serviceWorker' in navigator) {
@@ -58,7 +59,24 @@
             .then(function () {console.log('service worker registered');})
             .catch(function () {console.log('service worker failed'); });
             }
-
+            function getTotalKcal(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                sum=0;
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                    refeicoes.cafe.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    refeicoes.almoco.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                    refeicoes.cafeTarde.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                    refeicoes.janta.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                document.getElementById("total").innerHTML=`Total ${sum.toFixed(2)} KCAL`;
+            }
             function getAliments(){
                 let refeicoes=localStorage.getItem('refeicoes');
                 refeicoes=JSON.parse(refeicoes);
