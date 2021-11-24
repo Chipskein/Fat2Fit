@@ -207,6 +207,36 @@ h5 {
     width: 100%;
 }
 
+/* .div-alimentos {} */
+.alimento-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 20px;
+}
+.alimento-icon {
+    width: 45px;
+    height: 40px;
+}
+.alimento-txt {
+    margin-left: 10px;
+    font-size: 24px;
+}
+.alimento-kcal {
+    margin-left: 60px;
+    color: var(--laranja-color);
+}
+.alimento-btn {
+    margin-left: 60px;
+    background-color: transparent;
+    border-color: transparent;
+}
+.alimento-btn-icon {
+    width: 25px;
+    height: 20px;
+}
+
+
 
 @media (max-width: 1210px){
     html {

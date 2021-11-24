@@ -30,6 +30,38 @@
                     <img class="iconCheck" src="imgs/lupa.png" alt="plus">
                 </div>
             </div>
+            <div id="div-alimentos">
+                <div class="alimento-container">
+                    <img class="alimento-icon" src="./imgs/dish.png" />
+                    <p class="alimento-txt">Batata Inglesa</p>
+                    <p class="alimento-kcal">350 kcal</p>
+                    <div class="alimento-btn" onclick="addAlimento()" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                </div>
+                <div class="alimento-container">
+                    <img class="alimento-icon" src="./imgs/dish.png" />
+                    <p class="alimento-txt">Batata Inglesa</p>
+                    <p class="alimento-kcal">350 kcal</p>
+                    <div class="alimento-btn" onclick="addAlimento()" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                </div>
+                <div class="alimento-container">
+                    <img class="alimento-icon" src="./imgs/dish.png" />
+                    <p class="alimento-txt">Batata Inglesa</p>
+                    <p class="alimento-kcal">350 kcal</p>
+                    <div class="alimento-btn" onclick="addAlimento()" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                </div>
+                <div class="alimento-container">
+                    <img class="alimento-icon" src="./imgs/dish.png" />
+                    <p class="alimento-txt">Batata Inglesa</p>
+                    <p class="alimento-kcal">350 kcal</p>
+                    <div class="alimento-btn" onclick="addAlimento()" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                </div>
+                <div class="alimento-container">
+                    <img class="alimento-icon" src="./imgs/dish.png" />
+                    <p class="alimento-txt">Batata Inglesa</p>
+                    <p class="alimento-kcal">350 kcal</p>
+                    <div class="alimento-btn" onclick="addAlimento()" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                </div>
+            </div>
         </div>
 
         <script>
@@ -47,8 +79,7 @@
             async function searchAlim() {
                 var input = document.getElementById('inputSearch').value;
                 console.log(input);
-                var url = `https://caloriasporalimentoapi.herokuapp.com/api/calorias/?descricao=${input}`;
-                var response = await fetch(url,{"Content-type":"application/json","Access-Control-Request-Method":"GET","Access-Control-Allow-Origin": "*"});
+                var response = await fetch('https://api-taquinho.herokuapp.com/api/v1/food');
                 console.log(response);
             }
         </script>
