@@ -220,7 +220,7 @@ h5 {
 }
 .alimento-txt {
     margin-left: 10px;
-    font-size: 24px;
+    font-size: 15px !important;
 }
 .alimento-kcal {
     margin-left: 60px;
@@ -244,6 +244,26 @@ h5 {
     font-size: 28px;
     text-align: center;
 }
+.alimentos-footer {
+    display: flex;
+}
+#itensInfo {
+    color: var(--ciano-color);
+}
+.confirm-alim-btn {
+    background-color: var(--ciano-color);
+    color: #fff;
+    width: 154px;
+    height: 53px;
+    border-radius: 20px;
+    border-width: 0px;
+}
+.confirm-alim-btn p {
+    text-align: center;
+}
+
+
+
 @media (max-width: 1210px){
     html {
         font-size: 60%;
