@@ -22,6 +22,7 @@
                 <p id="refeicao-name"></p>
                 <p id='alimentos-txt'>Alimentos</p>
                 <div id="alimentos-refe"></div>
+                <button onclick="previusPage()">Previus Page</button><button onclick="nextPage()">Next Page</button>
                 <div class="alimentos-footer2">
                     <p id="total">Total 0 KCAL</p>
                     <div id="back-button"  onclick="{location.href='index.html'}">
@@ -63,8 +64,9 @@
                 refeicoes=JSON.parse(refeicoes);
                 let div=document.getElementById('alimentos-refe');
                 let txt = '';
-                if(localStorage.getItem('refeicao')=='Café da Manhã'){
-                    for(let c=offset-1;c<=limit-1&&c<refeicoes.cafe.length;c++){
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.cafe.length;c++){
                         txt += `
                         <div class="alimento-container" id="">
                             <div class=alimento-ico-tx>
@@ -74,20 +76,42 @@
                             <p class="alimento-kcal">${Math.round(refeicoes.cafe[c].attributes.energy.kcal)} kcal</p>
                             <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
                         </div>`;
+                        c1++
                     }
                     div.innerHTML = txt;
                 }
-                if(localStorage.getItem('refeicao')=='Almoco'){
-                    //console.log(refeicoes.almoco)
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
                 }
-                if(localStorage.getItem('refeicao')=='Café da Tarde'){
-                    //console.log(refeicoes.cafeTarde)
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
                 }
-                if(localStorage.getItem('refeicao')=='Janta'){
-                    //console.log(refeicoes.janta)
+                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
                 }
             }
-            
+            function nextPage(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                total=0;
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                    total=refeicoes.cafe.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    total=refeicoes.almoco.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                    total=refeicoes.cafeTarde.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                    total=refeicoes.janta.length;
+                }
+                offset+=4;
+                offset > total ? offset=total:false
+                getAliments();
+            };
+            function previusPage(){
+                offset-=4
+                offset < 0 ? offset=1:false;
+                getAliments();
+            };
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
