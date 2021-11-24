@@ -19,19 +19,20 @@
                     <img src="imgs/diet.png" class="logo" alt="">
                     <p class="logoTxt">Fat to Fit</p>
                 </div>
-                <!--<div class="secondLine row"></div> -->
                 <p id="refeicao-name"></p>
                 <p id='alimentos-txt'>Alimentos</p>
-                <div id="alimentos-refe">
-                    <div class="alimento-container">
-                        <img class="alimento-icon" src="./imgs/dish.png" />
-                        <p class="alimento-txt">Batata Inglesa</p>
-                        <p class="alimento-kcal">350 kcal</p>
-                        <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                <div id="alimentos-refe"></div>
+                <div class="alimentos-footer2">
+                    <p id="total">Total 0 KCAL</p>
+                    <div id="back-button"  onclick="{location.href='index.html'}">
+                        <p>Voltar</p>
                     </div>
                 </div>
+                <br>
             </div>
         <script>
+            let offset=1;//
+            let limit=5;
             window.addEventListener('DOMContentLoaded', (event) => {
                 if(localStorage.getItem('refeicao')){
                     let txt=document.getElementById('refeicao-name');
@@ -56,23 +57,37 @@
             .then(function () {console.log('service worker registered');})
             .catch(function () {console.log('service worker failed'); });
             }
+
             function getAliments(){
                 let refeicoes=localStorage.getItem('refeicoes');
                 refeicoes=JSON.parse(refeicoes);
-                console.log(refeicoes);
+                let div=document.getElementById('alimentos-refe');
+                let txt = '';
                 if(localStorage.getItem('refeicao')=='Café da Manhã'){
-                    console.log(refeicoes.cafe)
+                    for(let c=offset-1;c<=limit-1&&c<refeicoes.cafe.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.cafe[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.cafe[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                    }
+                    div.innerHTML = txt;
                 }
                 if(localStorage.getItem('refeicao')=='Almoco'){
-                    console.log(refeicoes.almoco)
+                    //console.log(refeicoes.almoco)
                 }
                 if(localStorage.getItem('refeicao')=='Café da Tarde'){
-                    console.log(refeicoes.cafeTarde)
+                    //console.log(refeicoes.cafeTarde)
                 }
                 if(localStorage.getItem('refeicao')=='Janta'){
-                    console.log(refeicoes.janta)
+                    //console.log(refeicoes.janta)
                 }
             }
+            
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>

@@ -91,8 +91,10 @@
                 for (let c = offset, l = 0; c < matchAliments.length && l < limit ; c++, l++) {
                     txt += `
                     <div class="alimento-container" id="${matchAliments[c].id}">
+                        <div class=alimento-ico-tx>
                         <img class="alimento-icon" src="./imgs/dish.png" />
                         <p class="alimento-txt">${matchAliments[c].description}</p>
+                        </div>
                         <p class="alimento-kcal">${Math.round(matchAliments[c].attributes.energy.kcal)} kcal</p>
                         <div class="alimento-btn" onclick="addAlimento(${matchAliments[c].id})" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
                     </div>`;
