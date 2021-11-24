@@ -45,11 +45,12 @@
             });
 
             async function searchAlim() {
-                var input = document.getElementById('inputSearch').value;
-                console.log(input);
-                var url = `https://caloriasporalimentoapi.herokuapp.com/api/calorias/?descricao=${input}`;
-                var response = await fetch(url,{"Content-type":"application/json","Access-Control-Request-Method":"GET","Access-Control-Allow-Origin": "*"});
-                console.log(response);
+                let stringSearch = document.getElementById('inputSearch').value;
+                let regex=new RegExp(`${stringSearch}`,'i');
+                API_URL="https://api-taquinho.herokuapp.com/api/v1/food";
+                let allAliments = await fetch(API_URL);
+                console.log(allAliments);
+                
             }
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
