@@ -235,9 +235,15 @@ h5 {
     width: 25px;
     height: 20px;
 }
-
-
-
+#refeicao-name{
+    font-size: 28px;
+    text-align: center;
+}
+#alimentos-txt{
+    color: var(--laranja-color);
+    font-size: 28px;
+    text-align: center;
+}
 @media (max-width: 1210px){
     html {
         font-size: 60%;

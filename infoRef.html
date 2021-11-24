@@ -21,12 +21,34 @@
                 </div>
                 <!--<div class="secondLine row"></div> -->
                 <p id="refeicao-name"></p>
-                <p>Alimentos</p>
+                <p id='alimentos-txt'>Alimentos</p>
+                <div id="alimentos-refe">
+                    <div class="alimento-container">
+                        <img class="alimento-icon" src="./imgs/dish.png" />
+                        <p class="alimento-txt">Batata Inglesa</p>
+                        <p class="alimento-kcal">350 kcal</p>
+                        <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                    </div>
+                </div>
             </div>
         <script>
             window.addEventListener('DOMContentLoaded', (event) => {
                 if(localStorage.getItem('refeicao')){
-                    document.getElementById('refeicao-name').innerHTML = `${localStorage.getItem('refeicao')}`;
+                    let txt=document.getElementById('refeicao-name');
+                    txt.innerHTML = `${localStorage.getItem('refeicao')}`;
+                    if(localStorage.getItem('refeicao')=='Café da Manhã'){
+                        txt.style.color="var(--ciano-color)";
+                    }
+                    if(localStorage.getItem('refeicao')=='Almoco'){
+                        txt.style.color="var(--azul-color)";
+                    }
+                    if(localStorage.getItem('refeicao')=='Café da Tarde'){
+                        txt.style.color="var(--amarelo-color)";
+                    }
+                    if(localStorage.getItem('refeicao')=='Janta'){
+                        txt.style.color="var(--laranja-color)";
+                    }
+                    getAliments();
                 }
             });
             if ('serviceWorker' in navigator) {
@@ -34,7 +56,23 @@
             .then(function () {console.log('service worker registered');})
             .catch(function () {console.log('service worker failed'); });
             }
-            
+            function getAliments(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                console.log(refeicoes);
+                if(localStorage.getItem('refeicao')=='Café da Manhã'){
+                    console.log(refeicoes.cafe)
+                }
+                if(localStorage.getItem('refeicao')=='Almoco'){
+                    console.log(refeicoes.almoco)
+                }
+                if(localStorage.getItem('refeicao')=='Café da Tarde'){
+                    console.log(refeicoes.cafeTarde)
+                }
+                if(localStorage.getItem('refeicao')=='Janta'){
+                    console.log(refeicoes.janta)
+                }
+            }
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
