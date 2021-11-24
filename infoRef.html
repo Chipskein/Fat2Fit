@@ -18,20 +18,23 @@
                 <div class="header row">
                     <img src="imgs/diet.png" class="logo" alt="">
                     <p class="logoTxt">Fat to Fit</p>
-                    <p id="meta" class="metaTxt">Meta - 0 kcal</p>
                 </div>
-                <div class="secondLine row">
-                    <p class="dataTxt">Qua 12/11/2021</p>
-                    <p id="total" class="totalTxt">Total - 0 kcal</p>
-                </div>
-                <p>Almoço</p>
+                <!--<div class="secondLine row"></div> -->
+                <p id="refeicao-name"></p>
+                <p>Alimentos</p>
             </div>
         <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                if(localStorage.getItem('refeicao')){
+                    document.getElementById('refeicao-name').innerHTML = `${localStorage.getItem('refeicao')}`;
+                }
+            });
             if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')
             .then(function () {console.log('service worker registered');})
             .catch(function () {console.log('service worker failed'); });
             }
+            
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
