@@ -92,6 +92,7 @@
                     localStorage.setItem('meta', 2100);
                     document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
                 }
+                getTotal();
             });
 
             if ('serviceWorker' in navigator) {
@@ -100,6 +101,19 @@
                 .catch(function (error) {console.log('service worker failed: '+error); });
             }
 
+            function getTotal(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                sum=0
+                Object.keys(refeicoes).forEach(function(key) {
+                    refeicao=refeicoes[key];
+                    refeicao.forEach(e=>{sum+=e.attributes.energy.kcal});
+                    console.log(`soma[${key}]:${sum}`);
+                });
+                sum=sum.toFixed(2);
+                console.log(sum);
+                document.getElementById("total").innerHTML=`Total - ${sum} kcal`
+            }
             function editarMeta() {
                 let metaButton = document.getElementById('meta-button');
                 metaButton.style.display = 'none';
@@ -119,7 +133,6 @@
                 document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
                 canceleditMeta();
             }
-
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
