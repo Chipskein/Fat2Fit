@@ -92,7 +92,6 @@
                     localStorage.setItem('meta', 2100);
                     document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
                 }
-                getTotal();
             });
 
             if ('serviceWorker' in navigator) {
@@ -102,24 +101,25 @@
             }
 
             function getTotal(){
-                let refeicoes=localStorage.getItem('refeicoes');
-                refeicoes=JSON.parse(refeicoes);
-                sum=0
+                let refeicoes = localStorage.getItem('refeicoes');
+                refeicoes = JSON.parse(refeicoes);
+                console.log(refeicoes);
+                let sum = 0
                 Object.keys(refeicoes).forEach(function(key) {
-                    refeicao=refeicoes[key];
-                    refeicao.forEach(e=>{sum+=e.attributes.energy.kcal});
+                    refeicao = refeicoes[key];
+                    refeicao.forEach( e => { sum += e.attributes.energy.kcal });
                     console.log(`soma[${key}]:${sum}`);
                 });
-                sum=sum.toFixed(2);
+                sum = sum.toFixed(2);
                 console.log(sum);
-                document.getElementById("total").innerHTML=`Total - ${sum} kcal`
+                document.getElementById("total").innerHTML=`Total - ${sum} kcal`;
             }
+
             function editarMeta() {
                 let metaButton = document.getElementById('meta-button');
                 metaButton.style.display = 'none';
                 let metaEdit = document.getElementById('meta-edit');
                 metaEdit.style.display = 'flex';
-                
             }
             function canceleditMeta(){
                 let metaButton = document.getElementById('meta-button');

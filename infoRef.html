@@ -22,7 +22,11 @@
                 <p id="refeicao-name"></p>
                 <p id='alimentos-txt'>Alimentos</p>
                 <div id="alimentos-refe"></div>
-                <button onclick="previusPage()">Previus Page</button><button onclick="nextPage()">Next Page</button>
+                <div class="pages-div">
+                    <button onclick="previusPage()" class="buttons-pages"><- Previus Page</button>
+                    <button onclick="nextPage()" class="buttons-pages">Next Page -></button>
+                </div>
+
                 <div class="alimentos-footer2">
                     <p id="total">Total 0 KCAL</p>
                     <div id="back-button"  onclick="{location.href='index.html'}">
@@ -64,16 +68,32 @@
                 refeicoes=JSON.parse(refeicoes);
                 sum=0;
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
-                    refeicoes.cafe.forEach(e=>{sum+=e.attributes.energy.kcal})
+                    refeicoes.cafe.forEach(e=>{
+                        if(!isNaN(e.attributes.energy.kcal)){
+                            sum+=e.attributes.energy.kcal
+                        }
+                    })
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
-                    refeicoes.almoco.forEach(e=>{sum+=e.attributes.energy.kcal})
+                    refeicoes.almoco.forEach(e=>{
+                        if(!isNaN(e.attributes.energy.kcal)){
+                            sum+=e.attributes.energy.kcal
+                        }
+                    })
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
-                    refeicoes.cafeTarde.forEach(e=>{sum+=e.attributes.energy.kcal})
+                    refeicoes.cafeTarde.forEach(e=>{
+                        if(!isNaN(e.attributes.energy.kcal)){
+                            sum+=e.attributes.energy.kcal
+                        }
+                    })
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Janta'){
-                    refeicoes.janta.forEach(e=>{sum+=e.attributes.energy.kcal})
+                    refeicoes.janta.forEach(e=>{
+                        if(!isNaN(e.attributes.energy.kcal)){
+                            sum+=e.attributes.energy.kcal
+                        }
+                    })
                 }
                 document.getElementById("total").innerHTML=`Total ${sum.toFixed(2)} KCAL`;
             }
@@ -91,8 +111,11 @@
                             <img class="alimento-icon" src="./imgs/dish.png" />
                             <p class="alimento-txt">${refeicoes.cafe[c].description}</p>
                             </div>
-                            <p class="alimento-kcal">${Math.round(refeicoes.cafe[c].attributes.energy.kcal)} kcal</p>
-                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                            <p class="alimento-grams">${refeicoes.cafe[c].base_qty} ${refeicoes.cafe[c].base_unit}</p>
+                            <p class="alimento-kcal">${!isNaN(refeicoes.cafe[c].attributes.energy.kcal) ? 
+                                Math.round(refeicoes.cafe[c].attributes.energy.kcal) : 0
+                            } kcal</p>
+                            <div class="alimento-btn" onclick="removeAlim(${c})" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
                         </div>`;
                         c1++
                     }
@@ -107,8 +130,11 @@
                             <img class="alimento-icon" src="./imgs/dish.png" />
                             <p class="alimento-txt">${refeicoes.almoco[c].description}</p>
                             </div>
-                            <p class="alimento-kcal">${Math.round(refeicoes.almoco[c].attributes.energy.kcal)} kcal</p>
-                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                            <p class="alimento-grams">${refeicoes.almoco[c].base_qty} ${refeicoes.almoco[c].base_unit}</p>
+                            <p class="alimento-kcal">${!isNaN(refeicoes.almoco[c].attributes.energy.kcal) ? 
+                                Math.round(refeicoes.almoco[c].attributes.energy.kcal) : 0
+                            } kcal</p>
+                            <div class="alimento-btn" onclick="removeAlim(${c})" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
                         </div>`;
                         c1++
                     }
@@ -123,8 +149,11 @@
                             <img class="alimento-icon" src="./imgs/dish.png" />
                             <p class="alimento-txt">${refeicoes.cafeTarde[c].description}</p>
                             </div>
-                            <p class="alimento-kcal">${Math.round(refeicoes.cafeTarde[c].attributes.energy.kcal)} kcal</p>
-                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                            <p class="alimento-grams">${refeicoes.cafeTarde[c].base_qty} ${refeicoes.cafeTarde[c].base_unit}</p>
+                            <p class="alimento-kcal">${!isNaN(refeicoes.cafeTarde[c].attributes.energy.kcal) ? 
+                                Math.round(refeicoes.cafeTarde[c].attributes.energy.kcal) : 0
+                            } kcal</p>
+                            <div class="alimento-btn" onclick="removeAlim(${c})" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
                         </div>`;
                         c1++
                     }
@@ -139,8 +168,11 @@
                             <img class="alimento-icon" src="./imgs/dish.png" />
                             <p class="alimento-txt">${refeicoes.janta[c].description}</p>
                             </div>
-                            <p class="alimento-kcal">${Math.round(refeicoes.janta[c].attributes.energy.kcal)} kcal</p>
-                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                            <p class="alimento-grams">${refeicoes.janta[c].base_qty} ${refeicoes.janta[c].base_unit}</p>
+                            <p class="alimento-kcal">${!isNaN(refeicoes.janta[c].attributes.energy.kcal) ? 
+                                Math.round(refeicoes.janta[c].attributes.energy.kcal) : 0
+                            } kcal</p>
+                            <div class="alimento-btn" onclick="removeAlim(${c})" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
                         </div>`;
                         c1++
                     }
@@ -172,6 +204,29 @@
                 offset < 0 ? offset=1:false;
                 getAliments();
             };
+
+            function removeAlim(id) {
+                let refeicoes = localStorage.getItem('refeicoes');
+                refeicoes = JSON.parse(refeicoes);
+                let refeicao = localStorage.getItem('refeicao');
+                if(refeicao == 'Café da Manhã'){
+                    refeicoes.cafe.splice(id, 1);
+                }
+                if(refeicao == 'Almoco'){
+                    refeicoes.almoco.splice(id, 1);
+                }
+                if(refeicao == 'Café da Tarde'){
+                    refeicoes.cafeTarde.splice(id, 1);
+                }
+                if(refeicao == 'Janta'){
+                    refeicoes.janta.splice(id, 1);
+                }
+                console.log(refeicoes);
+                refeicoes = JSON.stringify(refeicoes);
+                localStorage.setItem('refeicoes', refeicoes);
+                getAliments();
+                getTotalKcal();
+            }
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>

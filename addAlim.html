@@ -32,9 +32,12 @@
             </div>
 
             <div id="div-alimentos"></div>
-            <button onclick="previusPage()">Previus Page</button><button onclick="nextPage()">Next Page</button>
+            <div class="pages-div">
+                <button onclick="previusPage()" class="buttons-pages"><- Previus Page</button>
+                <button onclick="nextPage()" class="buttons-pages">Next Page -></button>
+            </div>
             <div class="alimentos-footer">
-                <p id="itensInfo">0 itens - 0 </p>
+                <p id="itensInfo">0 itens - 0 kcal</p>
                 <div class="confirm-alim-btn" onclick="confirmAdd()"><p>Confirmar</p></div>
             </div>
         </div>
@@ -69,6 +72,8 @@
             const divAlimentos = document.getElementById('div-alimentos');
 
             async function searchAlim() {
+                offset = 1;
+                limit = 5;
                 let stringSearch = document.getElementById('inputSearch').value;
                 let regex=new RegExp(`${stringSearch}`,'i');
                 API_URL="https://api-taquinho.herokuapp.com/api/v1/food";
@@ -82,7 +87,7 @@
                     }
                 }
                 //console.log(matchAliments[0].attributes.energy.kcal);
-                document.getElementById("itensInfo").innerHTML=`Items - ${matchAliments.length}`;
+                // document.getElementById("itensInfo").innerHTML=`Items - ${matchAliments.length}`;
                 renderAlim();
             }
 
@@ -96,7 +101,8 @@
                         <img class="alimento-icon" src="./imgs/dish.png" />
                         <p class="alimento-txt">${matchAliments[c].description}</p>
                         </div>
-                        <p class="alimento-kcal">${Math.round(matchAliments[c].attributes.energy.kcal)} kcal</p>
+                        <p class="alimento-grams">${matchAliments[c].base_qty} ${matchAliments[c].base_unit}</p>
+                        <p class="alimento-kcal">${Math.round(matchAliments[c].attributes.energy.kcal) ? Math.round(matchAliments[c].attributes.energy.kcal) : 0} kcal</p>
                         <div class="alimento-btn" onclick="addAlimento(${matchAliments[c].id})" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
                     </div>`;
                 }
@@ -109,6 +115,16 @@
                         selectedAliments.push(matchAliments[c]);
                     }                    
                 }
+                let totalCal = 0;
+                for (let c = 0; c < selectedAliments.length; c++) {
+                    if(!isNaN(selectedAliments[c].attributes.energy.kcal)){
+                        console.log('entrou');
+                        totalCal += selectedAliments[c].attributes.energy.kcal;
+                    }
+                }
+                totalCal = Math.round(totalCal);
+                let info = document.getElementById("itensInfo");
+                info.innerHTML = `${selectedAliments.length} itens - ${totalCal} kcal`;
             }
             async function confirmAdd (){
                 var refeicoes = localStorage.getItem('refeicoes');
@@ -136,6 +152,7 @@
                 }
                 refeicoes = JSON.stringify(refeicoes);
                 localStorage.setItem('refeicoes', refeicoes);
+                window.location='infoRef';
             }
             function nextPage(){
                 total=matchAliments.length-1;
@@ -146,7 +163,7 @@
             function previusPage(){
                 total=matchAliments.length-1;
                 offset-=4
-                offset < 0 ? offset=1:false;
+                offset < 1 ? offset=1:false;
                 renderAlim();
             };
         
