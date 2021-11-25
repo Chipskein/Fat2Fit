@@ -21,7 +21,7 @@
                 <p id="meta" class="metaTxt">Meta - 0 kcal</p>
             </div>
             <div class='rowMsm'>
-                <img class='back' src='imgs/bx_bx-arrow-back.png'>
+                <a href="index.html"><img class='back' src='imgs/bx_bx-arrow-back.png'></a>
                 <p class="adicionarTxt">Adicionar um alimento</p>
             </div>
             <div id="searchAlim" class="row">
@@ -29,6 +29,13 @@
                 <div id="buttonX"  class="buttonX" onclick="searchAlim()">
                     <img class="iconCheck" src="imgs/lupa.png" alt="plus">
                 </div>
+            </div>
+
+            <div id="div-alimentos"></div>
+
+            <div class="alimentos-footer">
+                <p id="itensInfo">0 itens - 0 kcal</p>
+                <div class="confirm-alim-btn" onclick="confirmAdd()"><p>Confirmar</p></div>
             </div>
         </div>
 
@@ -42,15 +49,95 @@
             window.addEventListener('DOMContentLoaded', (event) => {
                 document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
                 document.getElementById('refeicaoTxt').innerHTML = localStorage.getItem('refeicao');
+
+                if(localStorage.getItem('refeicoes')){
+                    var refeicoes = localStorage.getItem('refeicoes');
+                } else {
+                    var refeicoes = {
+                        cafe: [],
+                        almoco: [],
+                        cafeTarde: [],
+                        janta: []
+                    }
+                    localStorage.setItem('refeicoes', JSON.stringify(refeicoes));
+                }
             });
+            var matchAliments = [];
+            var selectedAliments = [];
+            var limit = 5;
+            var offset = 0;
+            const divAlimentos = document.getElementById('div-alimentos');
 
             async function searchAlim() {
-                var input = document.getElementById('inputSearch').value;
-                console.log(input);
-                var url = `https://caloriasporalimentoapi.herokuapp.com/api/calorias/?descricao=${input}`;
-                var response = await fetch(url,{"Content-type":"application/json","Access-Control-Request-Method":"GET","Access-Control-Allow-Origin": "*"});
-                console.log(response);
+                let stringSearch = document.getElementById('inputSearch').value;
+                let regex=new RegExp(`${stringSearch}`,'i');
+                API_URL="https://api-taquinho.herokuapp.com/api/v1/food";
+                let response = await fetch(API_URL);
+                allAliments = await response.json();
+                console.log(allAliments);
+                matchAliments = [];
+                for(let c = 0; c < allAliments.length; c++){
+                    if(regex.test(allAliments[c].description)){
+                        matchAliments.push(allAliments[c]);
+                    }
+                }
+                console.log(matchAliments[0].attributes.energy.kcal);
+                renderAlim(limit, offset);
             }
+
+            function renderAlim(limit, offset){
+                divAlimentos.innerHTML = '';
+                var txt = '';
+                for (let c = offset, l = 0; c < matchAliments.length && l < limit ; c++, l++) {
+                    txt += `
+                    <div class="alimento-container" id="${matchAliments[c].id}">
+                        <div class=alimento-ico-tx>
+                        <img class="alimento-icon" src="./imgs/dish.png" />
+                        <p class="alimento-txt">${matchAliments[c].description}</p>
+                        </div>
+                        <p class="alimento-kcal">${Math.round(matchAliments[c].attributes.energy.kcal)} kcal</p>
+                        <div class="alimento-btn" onclick="addAlimento(${matchAliments[c].id})" ><img class="alimento-btn-icon" src="./imgs/plus.png" alt="" srcset=""></div>
+                    </div>`;
+                }
+                divAlimentos.innerHTML = txt;
+            }
+            
+            function addAlimento (id){
+                for (let c = 0; c < matchAliments.length; c++) {
+                    if(matchAliments[c].id == id){
+                        selectedAliments.push(matchAliments[c]);
+                    }                    
+                }
+            }
+
+            async function confirmAdd (){
+                var refeicoes = localStorage.getItem('refeicoes');
+                refeicoes = JSON.parse(refeicoes);
+                var refeicao = localStorage.getItem('refeicao');
+                if(refeicao == "Café da Manhã"){
+                    for (let c = 0; c < selectedAliments.length; c++) {
+                        refeicoes.cafe.push(selectedAliments[c]);
+                    }
+                }
+                if(refeicao == "Almoco"){
+                    for (let c = 0; c < selectedAliments.length; c++) {
+                        refeicoes.almoco.push(selectedAliments[c]);
+                    }
+                }
+                if(refeicao == "Café da Tarde"){
+                    for (let c = 0; c < selectedAliments.length; c++) {
+                        refeicoes.cafeTarde.push(selectedAliments[c]);
+                    }
+                }
+                if(refeicao == "Janta"){
+                    for (let c = 0; c < selectedAliments.length; c++) {
+                        refeicoes.janta.push(selectedAliments[c]);
+                    }
+                }
+                refeicoes = JSON.stringify(refeicoes);
+                localStorage.setItem('refeicoes', refeicoes);
+            }
+
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>

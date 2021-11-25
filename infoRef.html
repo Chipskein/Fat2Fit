@@ -18,20 +18,160 @@
                 <div class="header row">
                     <img src="imgs/diet.png" class="logo" alt="">
                     <p class="logoTxt">Fat to Fit</p>
-                    <p id="meta" class="metaTxt">Meta - 0 kcal</p>
                 </div>
-                <div class="secondLine row">
-                    <p class="dataTxt">Qua 12/11/2021</p>
-                    <p id="total" class="totalTxt">Total - 0 kcal</p>
+                <p id="refeicao-name"></p>
+                <p id='alimentos-txt'>Alimentos</p>
+                <div id="alimentos-refe"></div>
+                <button onclick="previusPage()">Previus Page</button><button onclick="nextPage()">Next Page</button>
+                <div class="alimentos-footer2">
+                    <p id="total">Total 0 KCAL</p>
+                    <div id="back-button"  onclick="{location.href='index.html'}">
+                        <p>Voltar</p>
+                    </div>
                 </div>
-                <p>Almoço</p>
+                <br>
             </div>
         <script>
+            let offset=1;//
+            let limit=5;
+            window.addEventListener('DOMContentLoaded', (event) => {
+                if(localStorage.getItem('refeicao')){
+                    let txt=document.getElementById('refeicao-name');
+                    txt.innerHTML = `${localStorage.getItem('refeicao')}`;
+                    if(localStorage.getItem('refeicao')=='Café da Manhã'){
+                        txt.style.color="var(--ciano-color)";
+                    }
+                    if(localStorage.getItem('refeicao')=='Almoco'){
+                        txt.style.color="var(--azul-color)";
+                    }
+                    if(localStorage.getItem('refeicao')=='Café da Tarde'){
+                        txt.style.color="var(--amarelo-color)";
+                    }
+                    if(localStorage.getItem('refeicao')=='Janta'){
+                        txt.style.color="var(--laranja-color)";
+                    }
+                    getAliments();
+                    getTotalKcal();
+                }
+            });
             if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js')
             .then(function () {console.log('service worker registered');})
             .catch(function () {console.log('service worker failed'); });
             }
+            function getTotalKcal(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                sum=0;
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                    refeicoes.cafe.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    refeicoes.almoco.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                    refeicoes.cafeTarde.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                    refeicoes.janta.forEach(e=>{sum+=e.attributes.energy.kcal})
+                }
+                document.getElementById("total").innerHTML=`Total ${sum.toFixed(2)} KCAL`;
+            }
+            function getAliments(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                let div=document.getElementById('alimentos-refe');
+                let txt = '';
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.cafe.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.cafe[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.cafe[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                        c1++
+                    }
+                    div.innerHTML = txt;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.almoco.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.almoco[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.almoco[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                        c1++
+                    }
+                    div.innerHTML = txt;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.cafeTarde.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.cafeTarde[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.cafeTarde[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                        c1++
+                    }
+                    div.innerHTML = txt;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                    let c1=0;
+                    for(let c=offset-1;c1<limit&&c<refeicoes.janta.length;c++){
+                        txt += `
+                        <div class="alimento-container" id="">
+                            <div class=alimento-ico-tx>
+                            <img class="alimento-icon" src="./imgs/dish.png" />
+                            <p class="alimento-txt">${refeicoes.janta[c].description}</p>
+                            </div>
+                            <p class="alimento-kcal">${Math.round(refeicoes.janta[c].attributes.energy.kcal)} kcal</p>
+                            <div class="alimento-btn" onclick="" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
+                        </div>`;
+                        c1++
+                    }
+                    div.innerHTML = txt;
+                }
+            }
+            function nextPage(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                total=0;
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                    total=refeicoes.cafe.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    total=refeicoes.almoco.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                    total=refeicoes.cafeTarde.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                    total=refeicoes.janta.length;
+                }
+                offset+=4;
+                offset > total ? offset=total:false
+                getAliments();
+            };
+            function previusPage(){
+                offset-=4
+                offset < 0 ? offset=1:false;
+                getAliments();
+            };
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
