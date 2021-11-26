@@ -26,7 +26,7 @@
             </div>
             <div class="secondLine">
                 <p class="dataTxt">Qua 12/11/2021</p>
-                <p id="total" class="totalTxt">Total - 0 kcal</p>
+                <p id="total" class="totalTxt"></p>
             </div>
             
             <div class="refeicoes cafeManha">
@@ -101,7 +101,6 @@
                 .then(function () {console.log('service worker registered');})
                 .catch(function (error) {console.log('service worker failed: '+error); });
             }
-
             function getTotal(){
                 let refeicoes = localStorage.getItem('refeicoes');
                 refeicoes = JSON.parse(refeicoes);
