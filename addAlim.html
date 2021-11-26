@@ -15,15 +15,17 @@
     </head>
     <body>
         <div class="container">
-            <div class="header row">
-                <img src="imgs/diet.png" class="logo" alt="">
-                <p id="refeicaoTxt" class="logoTxt">Fat to Fit</p>
+            <div class="secondLine">
+                <div class="row padding">
+                    <img src="imgs/diet.png" class="logo" alt="">
+                    <p class="logoTxt">Fat to Fit</p>
+                </div>
                 <p id="meta" class="metaTxt">Meta - 0 kcal</p>
             </div>
             <div class='rowMsm'>
                 <a href="index.html"><img class='back' src='imgs/bx_bx-arrow-back.png'></a>
-                <p class="adicionarTxt">Adicionar um alimento</p>
             </div>
+            <p align=center class="adicionarTxt">Adicionar um alimento</p>
             <div id="searchAlim" class="row">
                 <input id="inputSearch" type="text" placeholder="Frango ...">
                 <div id="buttonX"  class="buttonX" onclick="searchAlim()">
@@ -34,11 +36,11 @@
             <div id="div-alimentos"></div>
             <div class="pages-div">
                 <button onclick="previusPage()" class="buttons-pages"><- Previus Page</button>
-                <button onclick="nextPage()" class="buttons-pages">Next Page -></button>
+                <button onclick="nextPage()" class="buttons-pages2">Next Page -></button>
             </div>
             <div class="alimentos-footer">
                 <p id="itensInfo">0 itens - 0 kcal</p>
-                <div class="confirm-alim-btn" onclick="confirmAdd()"><p>Confirmar</p></div>
+                <div class="confirm-alim-btn" onclick="confirmAdd()"><p align=center>Confirmar</p></div>
             </div>
         </div>
 
@@ -51,7 +53,7 @@
 
             window.addEventListener('DOMContentLoaded', (event) => {
                 document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
-                document.getElementById('refeicaoTxt').innerHTML = localStorage.getItem('refeicao');
+                //document.getElementById('refeicaoTxt').innerHTML = localStorage.getItem('refeicao');
 
                 if(localStorage.getItem('refeicoes')){
                     var refeicoes = localStorage.getItem('refeicoes');
@@ -72,6 +74,8 @@
             const divAlimentos = document.getElementById('div-alimentos');
 
             async function searchAlim() {
+                let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='flex';
                 offset = 1;
                 limit = 5;
                 let stringSearch = document.getElementById('inputSearch').value;
@@ -158,12 +162,32 @@
                 total=matchAliments.length-1;
                 offset+=4;
                 offset > total ? offset=total:false
+                console.log(offset)
+                if(offset >= 5){
+                    let on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='flex';
+                }
+                if(offset == total){
+                    console.log('aqui')
+                    let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='none';
+                }
                 renderAlim();
             };
             function previusPage(){
                 total=matchAliments.length-1;
                 offset-=4
                 offset < 1 ? offset=1:false;
+                if(offset < 5){
+                    let on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='none';
+                }
+                if(offset == total-4){
+                    console.log('aqui')
+                    let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='flex';
+                }
+                console.log(offset)
                 renderAlim();
             };
         

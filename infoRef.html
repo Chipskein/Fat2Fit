@@ -15,7 +15,7 @@
     </head>
     <body>
             <div class="container">
-                <div class="header row">
+                <div class="row padding">
                     <img src="imgs/diet.png" class="logo" alt="">
                     <p class="logoTxt">Fat to Fit</p>
                 </div>
@@ -47,6 +47,7 @@
                     }
                     if(localStorage.getItem('refeicao')=='Almoco'){
                         txt.style.color="var(--azul-color)";
+                        document.getElementById("refeicao-name").innerHTML='Almoço'
                     }
                     if(localStorage.getItem('refeicao')=='Café da Tarde'){
                         txt.style.color="var(--amarelo-color)";
@@ -54,8 +55,11 @@
                     if(localStorage.getItem('refeicao')=='Janta'){
                         txt.style.color="var(--laranja-color)";
                     }
-                    getAliments();
-                    getTotalKcal();
+
+                    if(localStorage.getItem('refeicoes')){
+                        getAliments();
+                        getTotalKcal();
+                    }
                 }
             });
             if ('serviceWorker' in navigator) {
@@ -74,7 +78,8 @@
                         }
                     })
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
+                    document.getElementById("refeicao-name").innerHTML='Almoço'
                     refeicoes.almoco.forEach(e=>{
                         if(!isNaN(e.attributes.energy.kcal)){
                             sum+=e.attributes.energy.kcal
@@ -121,7 +126,7 @@
                     }
                     div.innerHTML = txt;
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
                     let c1=0;
                     for(let c=offset-1;c1<limit&&c<refeicoes.almoco.length;c++){
                         txt += `
@@ -186,7 +191,7 @@
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
                     total=refeicoes.cafe.length;
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
                     total=refeicoes.almoco.length;
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
