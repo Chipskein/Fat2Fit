@@ -25,8 +25,8 @@
                 <p id="meta" class="metaTxt">Meta - 0 kcal</p>
             </div>
             <div class="secondLine">
-                <p class="dataTxt">Qua 12/11/2021</p>
-                <p id="total" class="totalTxt"></p>
+                <p class="dataTxt" id="dataTxt"></p>
+                <p id="total" class="totalTxt">Total - 0 kcal</p>
             </div>
             
             <div class="refeicoes cafeManha">
@@ -44,8 +44,8 @@
                     <h5>Almoço</h5>
                 </div>
                 <div class="refeicoes-buttons">
-                    <div class="maisButton" onclick="localStorage.setItem('refeicao', 'Almoço');window.location.href='addAlim.html'"><img class="maisIcon" src="imgs/plus.png" alt=""></div>
-                    <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Almoço');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
+                    <div class="maisButton" onclick="localStorage.setItem('refeicao', 'Almoco');window.location.href='addAlim.html'"><img class="maisIcon" src="imgs/plus.png" alt=""></div>
+                    <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Almoco');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
 
@@ -94,6 +94,8 @@
                     localStorage.setItem('meta', 2100);
                     document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
                 }
+                Data();
+                if(localStorage.getItem('refeicoes')) getTotal();
             });
 
             if ('serviceWorker' in navigator) {
@@ -115,7 +117,6 @@
                 console.log(sum);
                 document.getElementById("total").innerHTML=`Total - ${sum} kcal`;
             }
-
             function editarMeta() {
                 let metaButton = document.getElementById('meta-button');
                 metaButton.style.display = 'none';
@@ -133,6 +134,38 @@
                 localStorage.setItem('meta', input);
                 document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
                 canceleditMeta();
+            }
+            function Data(){
+                let data=new Date();
+                let wkday=data.getDay();
+                switch(wkday){
+                    case 0:
+                        wkday='Dom';
+                        break
+                    case 1:
+                        wkday='Seg';
+                        break
+                    case 2:
+                        wkday='Ter';
+                        break
+                    case 3:
+                        wkday='Qua';
+                        break
+                    case 4:
+                        wkday='Qui';
+                        break
+                    case 5:
+                        wkday='Sex';
+                        break
+                    case 6:
+                        wkday='Sáb';
+                        break    
+                }
+                let day=data.getDate();
+                let month=data.getMonth();
+                let year=data.getFullYear();
+                let date_string=`${wkday} ${day}/${month}/${year}`;
+                document.getElementById("dataTxt").innerHTML=date_string;
             }
         </script>
         <script type="text/javascript" src="js/materialize.min.js"></script>
