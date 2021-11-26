@@ -45,7 +45,7 @@
                     if(localStorage.getItem('refeicao')=='Café da Manhã'){
                         txt.style.color="var(--ciano-color)";
                     }
-                    if(localStorage.getItem('refeicao')=='Almoço'){
+                    if(localStorage.getItem('refeicao')=='Almoco'){
                         txt.style.color="var(--azul-color)";
                     }
                     if(localStorage.getItem('refeicao')=='Café da Tarde'){
@@ -74,8 +74,9 @@
                         }
                     })
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoço'){
-                    refeicoes.Almoço.forEach(e=>{
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    document.getElementById("refeicao-name").innerHTML='Almoço'
+                    refeicoes.Almoco.forEach(e=>{
                         if(!isNaN(e.attributes.energy.kcal)){
                             sum+=e.attributes.energy.kcal
                         }
@@ -121,18 +122,18 @@
                     }
                     div.innerHTML = txt;
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoço'){
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
                     let c1=0;
-                    for(let c=offset-1;c1<limit&&c<refeicoes.Almoço.length;c++){
+                    for(let c=offset-1;c1<limit&&c<refeicoes.Almoco.length;c++){
                         txt += `
                         <div class="alimento-container" id="">
                             <div class=alimento-ico-tx>
                             <img class="alimento-icon" src="./imgs/dish.png" />
-                            <p class="alimento-txt">${refeicoes.Almoço[c].description}</p>
+                            <p class="alimento-txt">${refeicoes.Almoco[c].description}</p>
                             </div>
-                            <p class="alimento-grams">${refeicoes.Almoço[c].base_qty} ${refeicoes.Almoço[c].base_unit}</p>
-                            <p class="alimento-kcal">${!isNaN(refeicoes.Almoço[c].attributes.energy.kcal) ? 
-                                Math.round(refeicoes.Almoço[c].attributes.energy.kcal) : 0
+                            <p class="alimento-grams">${refeicoes.Almoco[c].base_qty} ${refeicoes.Almoco[c].base_unit}</p>
+                            <p class="alimento-kcal">${!isNaN(refeicoes.Almoco[c].attributes.energy.kcal) ? 
+                                Math.round(refeicoes.Almoco[c].attributes.energy.kcal) : 0
                             } kcal</p>
                             <div class="alimento-btn" onclick="removeAlim(${c})" ><img class="alimento-btn-icon" src="./imgs/minus.png" alt="" srcset=""></div>
                         </div>`;
@@ -186,8 +187,8 @@
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
                     total=refeicoes.cafe.length;
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoço'){
-                    total=refeicoes.Almoço.length;
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                    total=refeicoes.Almoco.length;
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
                     total=refeicoes.cafeTarde.length;
@@ -212,8 +213,8 @@
                 if(refeicao == 'Café da Manhã'){
                     refeicoes.cafe.splice(id, 1);
                 }
-                if(refeicao == 'Almoço'){
-                    refeicoes.Almoço.splice(id, 1);
+                if(refeicao == 'Almoco'){
+                    refeicoes.Almoco.splice(id, 1);
                 }
                 if(refeicao == 'Café da Tarde'){
                     refeicoes.cafeTarde.splice(id, 1);
