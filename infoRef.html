@@ -47,6 +47,7 @@
                     }
                     if(localStorage.getItem('refeicao')=='Almoco'){
                         txt.style.color="var(--azul-color)";
+                        document.getElementById("refeicao-name").innerHTML='Almoço'
                     }
                     if(localStorage.getItem('refeicao')=='Café da Tarde'){
                         txt.style.color="var(--amarelo-color)";
@@ -54,7 +55,7 @@
                     if(localStorage.getItem('refeicao')=='Janta'){
                         txt.style.color="var(--laranja-color)";
                     }
-                    
+
                     if(localStorage.getItem('refeicoes')){
                         getAliments();
                         getTotalKcal();
@@ -77,7 +78,7 @@
                         }
                     })
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
                     document.getElementById("refeicao-name").innerHTML='Almoço'
                     refeicoes.almoco.forEach(e=>{
                         if(!isNaN(e.attributes.energy.kcal)){
