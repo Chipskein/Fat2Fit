@@ -54,8 +54,11 @@
                     if(localStorage.getItem('refeicao')=='Janta'){
                         txt.style.color="var(--laranja-color)";
                     }
-                    getAliments();
-                    getTotalKcal();
+                    
+                    if(localStorage.getItem('refeicoes')){
+                        getAliments();
+                        getTotalKcal();
+                    }
                 }
             });
             if ('serviceWorker' in navigator) {
