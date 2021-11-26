@@ -126,7 +126,7 @@ h5 {
     color: var(--ciano-color);
 }
 #paddingbutton {
-    padding-bottom: 5%;
+    padding-bottom: 3%;
 }
 
 #meta-button p {
@@ -177,9 +177,7 @@ h5 {
 }
 
 .adicionarTxt {
-    margin-top: -8px;
-    position: relative;
-    left:200px;
+    margin-top: -4%;
     font-size: 1.7rem;
 }
 
@@ -227,48 +225,53 @@ h5 {
 }
 .alimento-txt {
     margin-left: 10px;
-    font-size: 15px !important;
+    font-size: 1.4rem;
+    width: 400px;
 }
 .alimento-kcal {
-    margin-left: 60px;
     color: var(--laranja-color);
+    font-size: 1.5rem;
+}
+.alimento-grams {
+    font-size: 1.5rem;
 }
 .alimento-btn {
-    margin-left: 60px;
     background-color: transparent;
     border-color: transparent;
 }
 .alimento-btn-icon {
-    width: 25px;
+    width: 20px;
     height: 20px;
 }
 #refeicao-name{
-    font-size: 28px;
+    font-size: 2.5rem;
     text-align: center;
 }
 #alimentos-txt{
     color: var(--laranja-color);
-    font-size: 28px;
+    font-size: 2.5rem;
     margin-left: 20px;
 }
 .alimentos-footer {
     display: flex;
     margin-left: 3%;
+    justify-content: center;
 }
 #itensInfo {
     color: var(--ciano-color);
     margin-right: 3%;
+    font-size: 2.1rem;
 }
 .confirm-alim-btn {
     background-color: var(--ciano-color);
     color: #fff;
     width: 154px;
-    height: 53px;
+    height: 45px;
     border-radius: 20px;
-    border-width: 0px;
+    margin-top: 2.5%;
 }
 .confirm-alim-btn p {
-    text-align: center;
+    margin-top: 7px;
 }
 .alimentos-footer2{
     display: flex;
@@ -295,23 +298,57 @@ h5 {
     flex-direction: row;
 }
 .pages-div {
+    display: flex;
     margin-top: 1%;
-    margin-left: 30%;
+    margin-left: 33%;
     margin-bottom: 1%;
 }
 .buttons-pages {
     background-color: transparent;
     border: 0px transparent;
+    display: none;
+    margin-left: 15px;
+}
+.buttons-pages2 {
+    background-color: transparent;
+    border: 0px transparent;
+    display: none;
 }
 
-@media (max-width: 1210px){
+@media (max-width: 1280px){
     html {
         font-size: 62%;
     }
+    .alimento-txt {
+        margin-left: 10px;
+        font-size: 1.4rem;
+        width: 300px;
+    }
 }
-@media (max-width: 770px){
+@media (max-width: 1090px){
+    .alimento-kcal {
+        color: var(--laranja-color);
+        font-size: 1.2rem;
+    }
+    .alimento-grams {
+        font-size: 1.2rem;
+    }
+    .alimento-txt {
+        margin-left: 10px;
+        font-size: 1.2rem;
+        width: 230px;
+    }
+}
+@media (max-width: 865px){
     html {
         font-size: 70%;
+    }
+    .alimento-kcal {
+        color: var(--laranja-color);
+        font-size: 1.5rem;
+    }
+    .alimento-grams {
+        font-size: 1.5rem;
     }
     body {
         background-color: white !important;
@@ -322,10 +359,37 @@ h5 {
         height: 100vh;
         background-color: white;
     }
-    .dataTxt {
-        margin-right: 40%;
-    }
     
+}
+@media (max-width: 500px){
+    html {
+        font-size: 70%;
+    }
+    .alimento-kcal {
+        color: var(--laranja-color);
+        font-size: 1.3rem;
+    }
+    .alimento-grams {
+        font-size: 1.3rem;
+    }
+    body {
+        background-color: white !important;
+        overflow: hidden;
+    }
+    .container {
+        width: 100vw;
+        height: 100vh;
+        background-color: white;
+    }
+    .alimento-btn-icon {
+        width: 15px;
+        height: 15px;
+    }
+    .alimento-txt {
+        margin-left: 10px;
+        font-size: 1.0rem;
+        width: 120px;
+    }
 }
 /* @media (max-width: 528px){
     
