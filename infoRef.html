@@ -187,8 +187,8 @@
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
                     total=refeicoes.cafe.length;
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoco'){
-                    total=refeicoes.Almoco.length;
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
+                    total=refeicoes.almoco.length;
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
                     total=refeicoes.cafeTarde.length;
@@ -214,7 +214,7 @@
                     refeicoes.cafe.splice(id, 1);
                 }
                 if(refeicao == 'Almoco'){
-                    refeicoes.Almoco.splice(id, 1);
+                    refeicoes.almoco.splice(id, 1);
                 }
                 if(refeicao == 'Café da Tarde'){
                     refeicoes.cafeTarde.splice(id, 1);
