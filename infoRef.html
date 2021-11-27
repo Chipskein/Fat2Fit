@@ -183,8 +183,10 @@
                     }
                     div.innerHTML = txt;
                 }
-                let on = document.getElementsByClassName('buttons-pages2')
-                    on[0].style.display='flex';
+                if(offset){
+                    let on = document.getElementsByClassName('buttons-pages2')
+                        on[0].style.display='flex';
+                }
             }
             function nextPage(){
                 let refeicoes=localStorage.getItem('refeicoes');
@@ -204,7 +206,7 @@
                 }
                 offset+=4;
                 offset > total ? offset=total:false
-                if(offset >= 5){
+                if(offset >= 2){
                     let on = document.getElementsByClassName('buttons-pages')
                     on[0].style.display='flex';
                 }
@@ -233,7 +235,7 @@
                 }
                 offset-=4
                 offset < 0 ? offset=1:false;
-                if(offset >= 5){
+                if(offset >= 2){
                     let on = document.getElementsByClassName('buttons-pages')
                     on[0].style.display='flex';
                 }
