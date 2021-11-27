@@ -24,7 +24,7 @@
                 <div id="alimentos-refe"></div>
                 <div class="pages-div">
                     <button onclick="previusPage()" class="buttons-pages"><- Previus Page</button>
-                    <button onclick="nextPage()" class="buttons-pages">Next Page -></button>
+                    <button onclick="nextPage()" class="buttons-pages2">Next Page -></button>
                 </div>
 
                 <div class="alimentos-footer2">
@@ -183,6 +183,8 @@
                     }
                     div.innerHTML = txt;
                 }
+                let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='flex';
             }
             function nextPage(){
                 let refeicoes=localStorage.getItem('refeicoes');
@@ -202,11 +204,44 @@
                 }
                 offset+=4;
                 offset > total ? offset=total:false
+                if(offset >= 5){
+                    let on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='flex';
+                }
+                if(offset == total){
+                    console.log('aqui')
+                    let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='none';
+                }
                 getAliments();
             };
             function previusPage(){
+                let refeicoes=localStorage.getItem('refeicoes');
+                refeicoes=JSON.parse(refeicoes);
+                total=0;
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                    total=refeicoes.cafe.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
+                    total=refeicoes.almoco.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                    total=refeicoes.cafeTarde.length;
+                }
+                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                    total=refeicoes.janta.length;
+                }
                 offset-=4
                 offset < 0 ? offset=1:false;
+                if(offset >= 5){
+                    let on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='flex';
+                }
+                if(offset == total){
+                    console.log('aqui')
+                    let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='none';
+                }
                 getAliments();
             };
 
