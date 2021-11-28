@@ -179,6 +179,7 @@ h5 {
 .adicionarTxt {
     margin-top: -4%;
     font-size: 1.7rem;
+    text-align: center;
 }
 
 #searchAlim {
@@ -270,6 +271,12 @@ h5 {
     height: 45px;
     border-radius: 20px;
     margin-top: 2.5%;
+}
+.confirm-alim-btn:disabled{
+    background-color: grey;
+    border-color: gray;
+    color: black;
+
 }
 .confirm-alim-btn p {
     margin-top: 7px;

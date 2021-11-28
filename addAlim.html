@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
     <head>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css" />
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="imgs/diet.png" type="image/png">
         <link rel="manifest" href="manifest.json">
@@ -23,9 +23,9 @@
                 <p id="meta" class="metaTxt">Meta - 0 kcal</p>
             </div>
             <div class='rowMsm'>
-                <a href="index.html"><img class='back' src='imgs/bx_bx-arrow-back.png'></a>
+                <a href="index.html"><img class='back' src='imgs/bx_bx-arrow-back.png' alt="flexa-preta"></a>
             </div>
-            <p align=center class="adicionarTxt">Adicionar um alimento</p>
+            <p class="adicionarTxt">Adicionar um alimento</p>
             <div id="searchAlim" class="row">
                 <input id="inputSearch" type="text" placeholder="Frango ...">
                 <div id="buttonX"  class="buttonX" onclick="searchAlim()">
@@ -36,7 +36,7 @@
             <div id="div-alimentos"></div>
             <h5 id='respTxt'>Procurando...</h5>
             <div class="pages-div">
-                <button onclick="previusPage()" class="buttons-pages"><- Previus Page</button>
+                <button onclick="previusPage()" class="buttons-pages">$lt;- Previus Page</button>
                 <button onclick="nextPage()" class="buttons-pages2">Next Page -></button>
             </div>
             <div class="alimentos-footer">
@@ -225,6 +225,6 @@
             };
         
         </script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script  src="js/materialize.min.js"></script>
     </body>
 </html>

@@ -1,11 +1,11 @@
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
     <head>
         <!--Import Google Icon Font-->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <!--Import materialize.css-->
-        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"/>
         <link rel="stylesheet" href="css/style.css">
         <link rel="icon" href="imgs/diet.png" type="image/png">
         <link rel="manifest" href="./manifest.json">
@@ -16,7 +16,7 @@
     </head>
     <body>
         
-        <div class="container">
+    <div class="container" >
             <div class="secondLine">
                 <div class="row padding">
                     <img src="imgs/diet.png" class="logo" alt="">
@@ -27,8 +27,7 @@
             <div class="secondLine">
                 <p class="dataTxt" id="dataTxt"></p>
                 <p id="total" class="totalTxt">Total - 0 kcal</p>
-            </div>
-            
+            </div>           
             <div class="refeicoes cafeManha">
                 <div class="text-refeicoes">
                     <h5>Café da manhã</h5>
@@ -38,7 +37,6 @@
                     <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Café da Manhã');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
-
             <div class="refeicoes almoco">
                 <div class="text-refeicoes">
                     <h5>Almoço</h5>
@@ -48,7 +46,6 @@
                     <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Almoco');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
-
             <div class="refeicoes cafeTarde">
                 <div class="text-refeicoes">
                     <h5>Café da Tarde</h5>
@@ -58,7 +55,6 @@
                     <div class="infoButton" onclick="localStorage.setItem('refeicao', 'Café da Tarde');window.location.href='infoRef.html'"><img class="infoIcon" src="imgs/information.png" alt=""></div>
                 </div>
             </div>
-
             <div class="refeicoes janta">
                 <div class="text-refeicoes">
                     <h5>Janta</h5>
@@ -69,23 +65,17 @@
                 </div>
             </div>
             <div id="paddingbutton">
-            <div id="meta-button" class="row" onclick="editarMeta()">
-                <p id="meta-button-txt">Editar Meta</p>
-                <img src="imgs/pencil.png" alt="lapis">
-            </div>
-            <div id="meta-edit" class="row">
-                <input id="inputMeta" type="number" placeholder="Meta ...">
-                <div id="buttonX"  class="buttonX" onclick="canceleditMeta()">
-                    <img class="iconX" src="imgs/plus.png" alt="plus">
+                <div id="meta-button" class="row" onclick="editarMeta()">
+                    <p id="meta-button-txt">Editar Meta</p>
+                    <img src="imgs/pencil.png" alt="lapis">
                 </div>
-                <div onclick="updateMeta()">
-                    <img class="iconCheck" src="imgs/check-mark.png" alt="check-mark">
+                <div id="meta-edit" class="row">
+                    <input id="inputMeta" type="number" placeholder="Meta ...">
+                    <div id="buttonX"  class="buttonX" onclick="canceleditMeta()"><img class="iconX" src="imgs/plus.png" alt="plus"></div>
+                    <div onclick="updateMeta()"><img class="iconCheck" src="imgs/check-mark.png" alt="check-mark"></div>
                 </div>
             </div>
-            </div>
-        </div>
-        </div>
-
+    </div>
         <script>
             window.addEventListener('DOMContentLoaded', (event) => {
                 if(localStorage.getItem('meta')){
@@ -168,6 +158,6 @@
                 document.getElementById("dataTxt").innerHTML=date_string;
             }
         </script>
-        <script type="text/javascript" src="js/materialize.min.js"></script>
+        <script src="js/materialize.min.js"></script>
     </body>
 </html>
