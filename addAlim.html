@@ -41,7 +41,7 @@
             </div>
             <div class="alimentos-footer">
                 <p id="itensInfo">0 itens - 0 kcal</p>
-                <button class="confirm-alim-btn" onclick="confirmAdd()">Confirmar</button>
+                <button disabled class="confirm-alim-btn" onclick="confirmAdd()">Confirmar</button>
             </div>
         </div>
 
@@ -101,6 +101,7 @@
                 renderAlim();
                 if(total>=0){
                     document.getElementById("respTxt").classList.add("hidden");
+                    document.getElementsByClassName('confirm-alim-btn')[0].disabled = false
                     if(maxpage!=1){
                         on = document.getElementsByClassName('buttons-pages2')
                         on[0].style.display='flex';
@@ -108,7 +109,7 @@
                 }
                 else{
                     document.getElementById("respTxt").innerHTML="Não Encontrado"
-                    // document.getElementsByClassName('confirm-alim-btn')[0].disabled = true
+                    document.getElementsByClassName('confirm-alim-btn')[0].disabled = true
                 }
             }
 
@@ -149,32 +150,37 @@
                 info.innerHTML = `${selectedAliments.length} itens - ${totalCal} kcal`;
             }
             async function confirmAdd (){
-                var refeicoes = localStorage.getItem('refeicoes');
-                refeicoes = JSON.parse(refeicoes);
-                var refeicao = localStorage.getItem('refeicao');
-                if(refeicao == "Café da Manhã"){
-                    for (let c = 0; c < selectedAliments.length; c++) {
-                        refeicoes.cafe.push(selectedAliments[c]);
+                if(selectedAliments.length>0){
+                    var refeicoes = localStorage.getItem('refeicoes');
+                    refeicoes = JSON.parse(refeicoes);
+                    var refeicao = localStorage.getItem('refeicao');
+                    if(refeicao == "Café da Manhã"){
+                        for (let c = 0; c < selectedAliments.length; c++) {
+                            refeicoes.cafe.push(selectedAliments[c]);
+                        }
                     }
-                }
-                if(refeicao == "Almoco"){
-                    for (let c = 0; c < selectedAliments.length; c++) {
-                        refeicoes.almoco.push(selectedAliments[c]);
+                    if(refeicao == "Almoco"){
+                        for (let c = 0; c < selectedAliments.length; c++) {
+                            refeicoes.almoco.push(selectedAliments[c]);
+                        }
                     }
-                }
-                if(refeicao == "Café da Tarde"){
-                    for (let c = 0; c < selectedAliments.length; c++) {
-                        refeicoes.cafeTarde.push(selectedAliments[c]);
+                    if(refeicao == "Café da Tarde"){
+                        for (let c = 0; c < selectedAliments.length; c++) {
+                            refeicoes.cafeTarde.push(selectedAliments[c]);
+                        }
                     }
-                }
-                if(refeicao == "Janta"){
-                    for (let c = 0; c < selectedAliments.length; c++) {
-                        refeicoes.janta.push(selectedAliments[c]);
+                    if(refeicao == "Janta"){
+                        for (let c = 0; c < selectedAliments.length; c++) {
+                            refeicoes.janta.push(selectedAliments[c]);
+                        }
                     }
+                    refeicoes = JSON.stringify(refeicoes);
+                    localStorage.setItem('refeicoes', refeicoes);
+                    window.location='infoRef.html';
                 }
-                refeicoes = JSON.stringify(refeicoes);
-                localStorage.setItem('refeicoes', refeicoes);
-                window.location='infoRef.html';
+                else{
+                    alert("Adicione ao menos um ingrediente");
+                }
             }
             function nextPage(){       
                 if(page+1<=maxpage){
