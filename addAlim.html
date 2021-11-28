@@ -77,6 +77,8 @@
 
             async function searchAlim() {
                 let stringSearch = document.getElementById('inputSearch').value;
+                document.getElementById("respTxt").innerHTML="Procurando"
+                document.getElementById("respTxt").classList.contains("hidden") ? document.getElementById("respTxt").classList.remove('hidden'):false
                 let regex=new RegExp(`${stringSearch}`,'i');
                 API_URL="https://api-taquinho.herokuapp.com/api/v1/food";
                 let response = await fetch(API_URL);
@@ -95,13 +97,18 @@
                 let on = document.getElementsByClassName('buttons-pages2')
                     on[0].style.display='none';
                     on = document.getElementsByClassName('buttons-pages')
-                    on[0].style.display='none';
+                    on[0].style.display='none';                
                 renderAlim();
-                if(total>0&&maxpage!=1){
-                    on = document.getElementsByClassName('buttons-pages2')
-                    on[0].style.display='flex';
+                if(total>=0){
+                    document.getElementById("respTxt").classList.add("hidden");
+                    if(maxpage!=1){
+                        on = document.getElementsByClassName('buttons-pages2')
+                        on[0].style.display='flex';
+                    }
                 }
-            
+                else{
+                    document.getElementById("respTxt").innerHTML="Não Encontrado"
+                }
             }
 
             function renderAlim(){
