@@ -264,6 +264,7 @@ h5 {
 }
 .confirm-alim-btn {
     background-color: var(--ciano-color);
+    border: var(--ciano-color);
     color: #fff;
     width: 154px;
     height: 45px;
@@ -282,6 +283,8 @@ h5 {
 }
 #back-button{
     border-color: var(--ciano-color);
+    background-color: white;
+    color: var(--ciano-color);
     border-width: 2px;
     border-style: solid;
     border-radius: 15px;

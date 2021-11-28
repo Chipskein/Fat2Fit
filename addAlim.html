@@ -41,7 +41,7 @@
             </div>
             <div class="alimentos-footer">
                 <p id="itensInfo">0 itens - 0 kcal</p>
-                <div class="confirm-alim-btn" onclick="confirmAdd()"><p align=center>Confirmar</p></div>
+                <button class="confirm-alim-btn" onclick="confirmAdd()">Confirmar</button>
             </div>
         </div>
 
@@ -108,6 +108,7 @@
                 }
                 else{
                     document.getElementById("respTxt").innerHTML="Não Encontrado"
+                    // document.getElementsByClassName('confirm-alim-btn')[0].disabled = true
                 }
             }
 
