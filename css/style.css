@@ -394,3 +394,7 @@ h5 {
 /* @media (max-width: 528px){
     
 } */
+#respTxt{
+    text-align: center;
+    color: var(--laranja-color);
+}

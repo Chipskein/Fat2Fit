@@ -36,8 +36,9 @@
                 <br>
             </div>
         <script>
-            let offset=1;//
+            let offset=0;//
             let limit=5;
+            let total,maxpage,page;
             window.addEventListener('DOMContentLoaded', (event) => {
                 if(localStorage.getItem('refeicao')){
                     let txt=document.getElementById('refeicao-name');
@@ -55,10 +56,33 @@
                     if(localStorage.getItem('refeicao')=='Janta'){
                         txt.style.color="var(--laranja-color)";
                     }
-
-                    if(localStorage.getItem('refeicoes')){
+                    val=localStorage.getItem('refeicoes')
+                    val=JSON.parse(val);
+                    if(val.cafeTarde.length>0||val.almoco.length>0||val.cafe.length>0||val.janta.length>0){
                         getAliments();
                         getTotalKcal();
+                        total=0;
+                        maxpage=0
+                        page=0
+                        if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
+                            total=val.cafe.length-1;
+                        }
+                        if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
+                            total=val.almoco.length-1;
+                        }
+                        if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
+                            total=val.cafeTarde.length-1;
+                        }
+                        if(document.getElementById("refeicao-name").innerHTML=='Janta'){
+                            total=val.janta.length-1;
+                        }
+                        if(total>0){
+                            maxpage=Math.floor(total/limit)+1;
+                            if (maxpage!=1){
+                                let on = document.getElementsByClassName('buttons-pages2')
+                                on[0].style.display='flex';
+                            }
+                        }
                     }
                 }
             });
@@ -109,7 +133,7 @@
                 let txt = '';
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
                     let c1=0;
-                    for(let c=offset-1;c1<limit&&c<refeicoes.cafe.length;c++){
+                    for(let c=offset;c1<limit&&c<refeicoes.cafe.length;c++){
                         txt += `
                         <div class="alimento-container" id="">
                             <div class=alimento-ico-tx>
@@ -127,8 +151,8 @@
                     div.innerHTML = txt;
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
-                    let c1=0;
-                    for(let c=offset-1;c1<limit&&c<refeicoes.almoco.length;c++){
+                    let c1=0
+                    for(let c=offset;c1<limit&&c<refeicoes.almoco.length;c++){
                         txt += `
                         <div class="alimento-container" id="">
                             <div class=alimento-ico-tx>
@@ -147,7 +171,7 @@
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
                     let c1=0;
-                    for(let c=offset-1;c1<limit&&c<refeicoes.cafeTarde.length;c++){
+                    for(let c=offset;c1<limit&&c<refeicoes.cafeTarde.length;c++){
                         txt += `
                         <div class="alimento-container" id="">
                             <div class=alimento-ico-tx>
@@ -166,7 +190,7 @@
                 }
                 if(document.getElementById("refeicao-name").innerHTML=='Janta'){
                     let c1=0;
-                    for(let c=offset-1;c1<limit&&c<refeicoes.janta.length;c++){
+                    for(let c=offset;c1<limit&&c<refeicoes.janta.length;c++){
                         txt += `
                         <div class="alimento-container" id="">
                             <div class=alimento-ico-tx>
@@ -183,70 +207,48 @@
                     }
                     div.innerHTML = txt;
                 }
-                if(offset){
-                    let on = document.getElementsByClassName('buttons-pages2')
-                        on[0].style.display='flex';
-                }
             }
-            function nextPage(){
-                let refeicoes=localStorage.getItem('refeicoes');
-                refeicoes=JSON.parse(refeicoes);
-                total=0;
-                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
-                    total=refeicoes.cafe.length;
+            function nextPage(){       
+                if(page+1<=maxpage){
+                    offset+=limit;
+                    page++
                 }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
-                    total=refeicoes.almoco.length;
-                }
-                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
-                    total=refeicoes.cafeTarde.length;
-                }
-                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
-                    total=refeicoes.janta.length;
-                }
-                offset+=4;
-                offset > total ? offset=total:false
-                if(offset >= 2){
-                    let on = document.getElementsByClassName('buttons-pages')
-                    on[0].style.display='flex';
-                }
-                if(offset == total){
+                else{
                     console.log('aqui')
                     let on = document.getElementsByClassName('buttons-pages2')
                     on[0].style.display='none';
                 }
+                if(page+1==maxpage){
+                    let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='none';
+                }
+                if(page+1 > 1){
+                    let on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='flex';
+                }
+
+                
                 getAliments();
+                
             };
             function previusPage(){
-                let refeicoes=localStorage.getItem('refeicoes');
-                refeicoes=JSON.parse(refeicoes);
-                total=0;
-                if(document.getElementById("refeicao-name").innerHTML=='Café da Manhã'){
-                    total=refeicoes.cafe.length;
-                }
-                if(document.getElementById("refeicao-name").innerHTML=='Almoco'||document.getElementById("refeicao-name").innerHTML=='Almoço'){
-                    total=refeicoes.almoco.length;
-                }
-                if(document.getElementById("refeicao-name").innerHTML=='Café da Tarde'){
-                    total=refeicoes.cafeTarde.length;
-                }
-                if(document.getElementById("refeicao-name").innerHTML=='Janta'){
-                    total=refeicoes.janta.length;
-                }
-                offset-=4
-                offset < 0 ? offset=1:false;
-                if(offset >= 2){
-                    let on = document.getElementsByClassName('buttons-pages')
-                    on[0].style.display='flex';
-                }
-                if(offset == total){
-                    console.log('aqui')
+                console.log(page);
+               if(page>0){
+                   offset-=limit;
+                   page--;
+               }
+               if(page+1>=1&&page+1<=maxpage){
                     let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='flex';
+               }
+               if(page+1==1){
+                    let on = document.getElementsByClassName('buttons-pages')
                     on[0].style.display='none';
-                }
+               }
+
+        
                 getAliments();
             };
-
             function removeAlim(id) {
                 let refeicoes = localStorage.getItem('refeicoes');
                 refeicoes = JSON.parse(refeicoes);
@@ -263,9 +265,9 @@
                 if(refeicao == 'Janta'){
                     refeicoes.janta.splice(id, 1);
                 }
-                console.log(refeicoes);
                 refeicoes = JSON.stringify(refeicoes);
                 localStorage.setItem('refeicoes', refeicoes);
+                total--;
                 getAliments();
                 getTotalKcal();
             }

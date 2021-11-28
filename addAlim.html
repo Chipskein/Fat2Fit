@@ -34,6 +34,7 @@
             </div>
 
             <div id="div-alimentos"></div>
+            <h5 id='respTxt'>Procurando...</h5>
             <div class="pages-div">
                 <button onclick="previusPage()" class="buttons-pages"><- Previus Page</button>
                 <button onclick="nextPage()" class="buttons-pages2">Next Page -></button>
@@ -53,8 +54,6 @@
 
             window.addEventListener('DOMContentLoaded', (event) => {
                 document.getElementById('meta').innerHTML = "Meta - "+localStorage.getItem('meta')+" Kcal";
-                //document.getElementById('refeicaoTxt').innerHTML = localStorage.getItem('refeicao');
-
                 if(localStorage.getItem('refeicoes')){
                     var refeicoes = localStorage.getItem('refeicoes');
                 } else {
@@ -66,17 +65,17 @@
                     }
                     localStorage.setItem('refeicoes', JSON.stringify(refeicoes));
                 }
+                document.getElementById("respTxt").classList.add("hidden");
+                
             });
-            var matchAliments = [];
-            var selectedAliments = [];
-            let offset=1;//
+            let matchAliments = [];
+            let selectedAliments = [];
+            let offset=0;//
             let limit=5;
+            let total,maxpage,page;
             const divAlimentos = document.getElementById('div-alimentos');
 
             async function searchAlim() {
-
-                offset = 1;
-                limit = 5;
                 let stringSearch = document.getElementById('inputSearch').value;
                 let regex=new RegExp(`${stringSearch}`,'i');
                 API_URL="https://api-taquinho.herokuapp.com/api/v1/food";
@@ -89,17 +88,26 @@
                         matchAliments.push(allAliments[c]);
                     }
                 }
-                //console.log(matchAliments[0].attributes.energy.kcal);
-                // document.getElementById("itensInfo").innerHTML=`Items - ${matchAliments.length}`;
-                renderAlim();
+                total=matchAliments.length-1;
+                maxpage=Math.floor(total/limit)+1;
+                page=0;
+                offset=0;
                 let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='none';
+                    on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='none';
+                renderAlim();
+                if(total>0&&maxpage!=1){
+                    on = document.getElementsByClassName('buttons-pages2')
                     on[0].style.display='flex';
+                }
+            
             }
 
             function renderAlim(){
                 divAlimentos.innerHTML = '';
                 var txt = '';
-                for (let c = offset-1, l = 0; c < matchAliments.length && l < limit ; c++, l++) {
+                for (let c = offset, l = 0; c < matchAliments.length && l < limit ; c++, l++) {
                     txt += `
                     <div class="alimento-container" id="${matchAliments[c].id}">
                         <div class=alimento-ico-tx>
@@ -160,36 +168,45 @@
                 localStorage.setItem('refeicoes', refeicoes);
                 window.location='infoRef.html';
             }
-            function nextPage(){
-                total=matchAliments.length-1;
-                offset+=4;
-                offset > total ? offset=total:false
-                console.log(offset)
-                if(offset >= 5){
-                    let on = document.getElementsByClassName('buttons-pages')
-                    on[0].style.display='flex';
+            function nextPage(){       
+                if(page+1<=maxpage){
+                    offset+=limit;
+                    page++
                 }
-                if(offset == total){
+                else{
                     console.log('aqui')
                     let on = document.getElementsByClassName('buttons-pages2')
                     on[0].style.display='none';
                 }
+                if(page+1==maxpage){
+                    let on = document.getElementsByClassName('buttons-pages2')
+                    on[0].style.display='none';
+                }
+                if(page+1 > 1){
+                    let on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='flex';
+                }
+
+                
                 renderAlim();
+                
             };
             function previusPage(){
-                total=matchAliments.length-1;
-                offset-=4
-                offset < 1 ? offset=1:false;
-                if(offset < 5){
-                    let on = document.getElementsByClassName('buttons-pages')
-                    on[0].style.display='none';
-                }
-                if(offset == total-4){
-                    console.log('aqui')
+                console.log(page);
+               if(page>0){
+                   offset-=limit;
+                   page--;
+               }
+               if(page+1>=1&&page+1<=maxpage){
                     let on = document.getElementsByClassName('buttons-pages2')
                     on[0].style.display='flex';
-                }
-                console.log(offset)
+               }
+               if(page+1==1){
+                    let on = document.getElementsByClassName('buttons-pages')
+                    on[0].style.display='none';
+               }
+
+        
                 renderAlim();
             };
         
